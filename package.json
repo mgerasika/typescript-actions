@@ -1,8 +1,8 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "description": "First description",
-  "main": "src/index.js",
+  "main": "index.js",
   "dependencies": {
     "axios": "^0.16.2",
     "curl": "^0.1.4",
@@ -14,7 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc index.ts --declaration"
   },
   "repository": {
     "type": "git",
@@ -24,10 +25,6 @@
     "typescript",
     "redux",
     "actions"
-  ],
-  "files": [
-    "src/index.js",
-    "src/index.ts"
   ],
   "author": "Mykhaylo Gerasika",
   "license": "MIT",
