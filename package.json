@@ -1,8 +1,8 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "First description",
-  "main": "src/index.ts",
+  "main": "src/index.js",
   "dependencies": {
     "axios": "^0.16.2",
     "curl": "^0.1.4",
@@ -24,6 +24,10 @@
     "typescript",
     "redux",
     "actions"
+  ],
+  "files": [
+    "src/index.js",
+    "src/index.ts"
   ],
   "author": "Mykhaylo Gerasika",
   "license": "MIT",
