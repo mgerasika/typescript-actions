@@ -1,0 +1,34 @@
+{
+  "name": "typescript-actions",
+  "version": "1.0.2",
+  "description": "First description",
+  "main": "src/index.ts",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "curl": "^0.1.4",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack-cli": "^3.3.6",
+    "webpack": "^4.37.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mgerasika/typescript-actions.git"
+  },
+  "keywords": [
+    "typescript",
+    "redux",
+    "actions"
+  ],
+  "author": "Mykhaylo Gerasika",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgerasika/typescript-actions/issues"
+  },
+  "homepage": "https://github.com/mgerasika/typescript-actions#readme"
+}
