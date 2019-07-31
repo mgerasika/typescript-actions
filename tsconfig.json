@@ -1,20 +1,18 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "listFiles": true,
-    "isolatedModules": false,
     "moduleResolution": "node",
-    "suppressImplicitAnyIndexErrors": true,
+    "pretty": true,
+    "removeComments": true,
+    "declaration": false,
     "lib": [
       "dom",
-      "es5",
+      "es2017",
       "scripthost",
       "es2015.promise"
     ]
