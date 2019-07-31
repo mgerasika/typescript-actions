@@ -19,8 +19,7 @@ export const action = () => {
                 return res;
             };
         };
-        return descriptor;
-    };
+        return descriptor;    };
 }
 
 export interface IAction {

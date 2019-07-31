@@ -11,7 +11,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var _this = this;
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 function reducer() {
     // tslint:disable-next-line:only-arrow-functions
     return function (target, propertyKey, descriptor) {
@@ -48,3 +48,4 @@ exports.createReducer = function (inst) {
         return result[payload.name](store, payload);
     };
 };
+//# sourceMappingURL=reducer.js.map

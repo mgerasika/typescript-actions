@@ -18,7 +18,7 @@ export function reducer() {
     };
 }
 
-export const createReducer = (inst) => {
+export const createReducer = (inst: any) => {
     const proto = inst[`__proto__`];
     const keys = Object.getOwnPropertyNames(proto);
     const newKeys = keys.filter(key => {
@@ -27,11 +27,11 @@ export const createReducer = (inst) => {
         return hasDecorator;
     });
 
-    const result = newKeys.reduce((accum: {}, methodName) => {
+    const result: any = newKeys.reduce((accum: {}, methodName) => {
         const reducersFn = proto[methodName];
         return {...accum, ...reducersFn};
     }, {});
-    return (store, payload) => {
+    return (store: any, payload: any) => {
         return result[payload.name](store, payload);
     };
 };

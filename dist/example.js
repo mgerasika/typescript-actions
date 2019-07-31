@@ -16,7 +16,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-exports.__esModule = true;
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 var action_1 = require("./action");
 var reducer_1 = require("./reducer");
 var SumAction = /** @class */ (function () {
@@ -43,11 +46,17 @@ var SumAction = /** @class */ (function () {
     };
     ;
     __decorate([
-        action_1.action()
-    ], SumAction.prototype, "sum");
+        action_1.action(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], SumAction.prototype, "sum", null);
     __decorate([
-        action_1.action()
-    ], SumAction.prototype, "sumApi");
+        action_1.action(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], SumAction.prototype, "sumApi", null);
     return SumAction;
 }());
 exports.SumAction = SumAction;
@@ -67,13 +76,20 @@ var SumReducer = /** @class */ (function () {
     };
     ;
     __decorate([
-        reducer_1.reducer()
-    ], SumReducer.prototype, "sum");
+        reducer_1.reducer(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], SumReducer.prototype, "sum", null);
     __decorate([
-        reducer_1.reducer()
-    ], SumReducer.prototype, "sumApi");
+        reducer_1.reducer(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", [Object]),
+        __metadata("design:returntype", void 0)
+    ], SumReducer.prototype, "sumApi", null);
     return SumReducer;
 }());
 exports.SumReducer = SumReducer;
 var sumAction = new SumAction();
 var sumReducer = reducer_1.createReducer(new SumReducer());
+//# sourceMappingURL=example.js.map

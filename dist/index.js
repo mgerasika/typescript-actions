@@ -2,10 +2,10 @@
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-exports.__esModule = true;
-__export(require("./src/action"));
-__export(require("./src/reducer"));
-__export(require("./src/example"));
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./action"));
+__export(require("./reducer"));
+__export(require("./example"));
 var myIndex = /** @class */ (function () {
     function myIndex() {
     }
@@ -15,3 +15,4 @@ var myIndex = /** @class */ (function () {
     return myIndex;
 }());
 exports.myIndex = myIndex;
+//# sourceMappingURL=index.js.map

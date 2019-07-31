@@ -30,7 +30,7 @@ export class SumAction implements ISumRedux {
     @action()
     public sumApi(payload: ISum) {
         return (dispath: any, methodName: string) => {
-            Promise.resolve(payload.number1 + payload.number2).then((data) => {
+            Promise.resolve(payload.number1 + payload.number2).then((data: any) => {
                 dispath({
                     name: methodName,
                     payload: data

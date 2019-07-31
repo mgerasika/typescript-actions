@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.action = function () {
     // tslint:disable-next-line:only-arrow-functions
     return function (target, propertyKey, descriptor) {
@@ -20,3 +20,4 @@ exports.action = function () {
         return descriptor;
     };
 };
+//# sourceMappingURL=action.js.map

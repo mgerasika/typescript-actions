@@ -2,24 +2,17 @@
   "name": "typescript-actions",
   "version": "1.0.6",
   "description": "First description",
-  "main": "index.js",
+  "main": "dist/index.js",
   "dependencies": {
-    "axios": "^0.16.2",
-    "curl": "^0.1.4",
     "nodemon": "^1.19.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
-    "typescript": "^3.5.3",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6"
+    "typescript": "^3.5.3"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc index.ts --declaration",
-    "start2": "ts-node index.ts --declaration",
-    "dev": "./node_modules/nodemon/bin/nodemon.js"
+    "start": "tsc"
   },
   "repository": {
     "type": "git",
