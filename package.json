@@ -15,7 +15,7 @@
   "scripts": {
     "start": "tsc",
     "git-version": "npm --no-git-tag-version version patch",
-    "git": "git add * && git commit -m 1 && git push",
+    "git": "git add * && git commit -m \"Auto commit \" && git push",
     "publish": "npm run start && npm run git-version && npm run git && npm publish"
   },
   "repository": {
