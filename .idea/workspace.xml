@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d00708f-c843-4ad2-9231-8972781f36cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/action-base.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducer-base.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/action.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/action.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/action.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/action.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/action.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/action.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/reducer.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/reducer.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/reducer.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/reducer.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/utils.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/utils.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/action.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/example.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/example.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -82,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+            <state relative-caret-position="272">
+              <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -258,12 +236,12 @@
       <workItem from="1564578758945" duration="389000" />
       <workItem from="1564579246544" duration="302000" />
       <workItem from="1564579724354" duration="600000" />
-      <workItem from="1564638460941" duration="1272000" />
+      <workItem from="1564638460941" duration="1593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18335000" />
+    <option name="totallyTimeSpent" value="18656000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -284,7 +262,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.2901961" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32941177" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19019608" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.47941175" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -504,8 +482,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        <state relative-caret-position="272">
+          <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
         </state>
       </provider>
     </entry>
