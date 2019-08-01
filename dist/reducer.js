@@ -12,23 +12,29 @@ var __assign = (this && this.__assign) || function () {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+var action_base_1 = require("./action-base");
 function reducer() {
     // tslint:disable-next-line:only-arrow-functions
     return function (target, propertyKey, descriptor) {
-        // @ts-ignore
         Reflect.defineMetadata('design:name', propertyKey, descriptor.value);
-        // @ts-ignore
         Reflect.defineMetadata('design:decorator:reducer', true, descriptor.value);
+        var baseClass = Object.getPrototypeOf(target);
         var originalMethod = descriptor.value;
-        descriptor.value = function () {
-            return function (store, payload) {
-                // @ts-ignore
-                var res = originalMethod.apply(target, arguments)(store, payload);
-                console.log('redux ' + propertyKey + JSON.stringify(target));
-                return res;
+        if (baseClass.constructor === action_base_1.ActionBase) {
+            return descriptor;
+        }
+        else {
+            descriptor.value = function () {
+                return function (store, payload) {
+                    // @ts-ignore
+                    var res = originalMethod.apply(target, arguments)(store, payload);
+                    console.log('redux ' + propertyKey + JSON.stringify(target));
+                    return res;
+                };
             };
-        };
-        return descriptor;
+            return descriptor;
+        }
     };
 }
 exports.reducer = reducer;
@@ -37,7 +43,7 @@ exports.createReducer = function (inst) {
     var keys = Object.getOwnPropertyNames(proto);
     var newKeys = keys.filter(function (key) {
         // @ts-ignore
-        var hasDecorator = Reflect.getMetadata('design:decorator:reducer', _this[key]);
+        var hasDecorator = _this[key] && Reflect.getMetadata('design:decorator:reducer', _this[key]);
         return hasDecorator;
     });
     var result = newKeys.reduce(function (accum, methodName) {

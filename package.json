@@ -1,18 +1,22 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "First description",
   "main": "dist/index.js",
   "dependencies": {
-    "nodemon": "^1.19.1",
+    "@types/reflect-metadata": "^0.1.0",
+    "gulp": "^4.0.2",
+    "reflect-metadata": "^0.1.13",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.0.4",
-    "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "tsc"
+    "start": "tsc",
+    "x": "git add * && git commit -m 1 && git push",
+
+    "publish": "npm run start && npm publish"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
-import {action} from './action';
-import {createReducer, reducer} from './reducer';
+import {action} from '../src/action';
+import {createReducer, reducer} from '../src/reducer';
 
 interface ISum {
     number1: number;

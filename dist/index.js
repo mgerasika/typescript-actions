@@ -5,14 +5,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./action"));
 __export(require("./reducer"));
-__export(require("./example"));
-var myIndex = /** @class */ (function () {
-    function myIndex() {
-    }
-    myIndex.prototype.log = function () {
-        console.log('hello world');
-    };
-    return myIndex;
-}());
-exports.myIndex = myIndex;
+__export(require("./reducer-base"));
+__export(require("./store"));
+__export(require("./utils"));
 //# sourceMappingURL=index.js.map
