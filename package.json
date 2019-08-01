@@ -1,6 +1,6 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "First description",
   "main": "dist/index.js",
   "dependencies": {
@@ -16,7 +16,7 @@
     "build": "npm run start && npm run git-version && npm run git && npm publish",
     "start": "tsc",
     "git-version": "npm --no-git-tag-version version patch",
-    "git": "git add * && git commit -m \"Auto commit \" && git push"
+    "git": "git add * && git commit -m \"Auto commit \" && git push https://github.com/mgerasika/typescript-actions"
   },
   "repository": {
     "type": "git",
