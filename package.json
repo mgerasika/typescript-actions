@@ -1,6 +1,6 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "First description",
   "main": "dist/index.js",
   "dependencies": {
@@ -13,10 +13,10 @@
   },
   "devDependencies": {},
   "scripts": {
+    "build": "npm run start && npm run git-version && npm run git && npm publish",
     "start": "tsc",
     "git-version": "npm --no-git-tag-version version patch",
-    "git": "git add * && git commit -m \"Auto commit \" && git push",
-    "publish": "npm run start && npm run git-version && npm run git && npm publish"
+    "git": "git add * && git commit -m \"Auto commit \" && git push"
   },
   "repository": {
     "type": "git",
