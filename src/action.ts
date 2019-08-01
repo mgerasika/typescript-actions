@@ -1,5 +1,3 @@
-// decorator
-import {assert} from './utils';
 import 'reflect-metadata';
 import {ActionBase} from './action-base';
 
@@ -25,17 +23,10 @@ export const action = () => {
             descriptor.value = function() {
                 return (dispatcher: any) => {
                     // @ts-ignore
-                    const res = originalMethod.apply(target, arguments)(dispatcher, propertyKey);
-                    console.log('dispatch ' + propertyKey + JSON.stringify(target));
-                    return res;
+                    return originalMethod.apply(target, arguments)(dispatcher, propertyKey);
                 };
             };
             return descriptor;
         }
     };
 };
-
-export interface IAction {
-    name: string;
-    payload: any;
-}

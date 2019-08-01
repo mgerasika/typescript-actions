@@ -1,24 +1,25 @@
 import {createUniqueActionName} from './utils';
-import {action} from './action';
 
 export interface IAction {
     name: string;
     payload: any;
 }
 
+export declare type PromiseMix<First, Seccond> = Promise<First> | Seccond;
+
 export abstract class ActionBase {
-    private executingActionName: string = '';
-    private reduxDispatcher: IDispatch = () => {
+    private _executingActionName: string = '';
+    private _reduxDispatcher: IDispatch = () => {
     };
 
     public init(actionName: string, reduxDispatcher: IDispatch) {
-        this.executingActionName = actionName;
-        this.reduxDispatcher = reduxDispatcher;
+        this._executingActionName = actionName;
+        this._reduxDispatcher = reduxDispatcher;
     }
 
     public dispatchFailed(error: any) {
-        this.reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this.executingActionName + ':failed'),
+        this._reduxDispatcher({
+            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':failed'),
             payload: error,
         });
     }
@@ -26,31 +27,23 @@ export abstract class ActionBase {
     public abstract getStoreName(): string;
 
     public dispatchRequest() {
-        this.reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this.executingActionName + ':request'),
+        this._reduxDispatcher({
+            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':request'),
             payload: ''
         });
     }
 
     public dispatchSuccess(args: any) {
-        this.reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this.executingActionName + ':success'),
+        this._reduxDispatcher({
+            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':success'),
             payload: args
         });
     }
 
     protected dispatch(payload: any) {
-        this.reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this.executingActionName),
+        this._reduxDispatcher({
+            name: createUniqueActionName(this.getStoreName(), this._executingActionName),
             payload
-        });
-    }
-
-    @action()
-    public resetStore(): void {
-        this.reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this.executingActionName),
-            payload: null,
         });
     }
 }

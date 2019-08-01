@@ -1,4 +1,8 @@
 // tslint:disable-next-line
+import {ReducerBase} from './reducer-base';
+import {IStoreBase} from './store';
+import {IAction} from './action-base';
+
 export const __decorate = function(decorators: any, target: any, key: any, desc: any) {
     if (
         typeof Reflect === 'object' &&
@@ -57,3 +61,54 @@ export declare type ActionCtor<T, B, C> = {
 export declare function union<C extends {
     [key: string]: ActionCtor<string, {}, Ctor<{}>>;
 }>(ctors: C): C[keyof C]['action'];
+
+export const createReducer = (inst: ReducerBase<any>) => {
+    const proto = (inst as any)[`__proto__`];
+    const keys = Object.getOwnPropertyNames(proto);
+    const newKeys = keys.filter(key => {
+        // @ts-ignore
+        const hasDecorator = proto[key] && Reflect.getMetadata('design:decorator:reducer', proto[key]);
+        return hasDecorator;
+    });
+
+    const result: any = newKeys.reduce((accum: {}, methodName) => {
+        const reducersFn = createReducersFunctions(inst.getStoreName(), methodName, proto);
+        return {...accum, ...reducersFn};
+    }, {});
+    return (store: any, payload: IAction) => {
+        return result[payload.name](store, payload);
+    };
+};
+
+const createReducersFunctions = (storeName: string, methodName: string, proto: any): {} => {
+    const reducerFns: any = {};
+    reducerFns[createUniqueActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as any;
+        reducerInst.init(methodName, store);
+        return (reducerInst as any)[methodName](payload);
+    };
+
+    const requestMethodName = `${methodName}:request`;
+    reducerFns[createUniqueActionName(storeName, requestMethodName)] = (store: IStoreBase, payload: any) => {
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
+        reducerInst.init(requestMethodName, store);
+        return reducerInst.request();
+    };
+
+    const successMethodName = `${methodName}:success`;
+    reducerFns[createUniqueActionName(storeName, successMethodName)] = (store: IStoreBase, payload: any) => {
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
+        reducerInst.init(successMethodName, store);
+        reducerInst.success(payload);
+        return (reducerInst as any)[methodName](payload);
+    };
+
+    const failedMethodName = `${methodName}:failed`;
+    reducerFns[createUniqueActionName(storeName, failedMethodName)] = (store: IStoreBase, payload: any) => {
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
+        reducerInst.init(failedMethodName, store);
+        return reducerInst.failed(payload);
+    };
+
+    return reducerFns;
+};

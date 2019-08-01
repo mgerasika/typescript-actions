@@ -1,6 +1,6 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.38",
+  "version": "1.0.46",
   "description": "First description",
   "main": "dist/index.js",
   "dependencies": {
@@ -9,14 +9,21 @@
     "reflect-metadata": "^0.1.13",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.0.4",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "webpack-babel-jest": "^1.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.16",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2"
+  },
   "scripts": {
-    "build": "npm run start && npm run git-version && npm run git && npm publish",
+    "build": "npm run start && npm run git-version && npm publish",
     "start": "tsc",
     "git-version": "npm --no-git-tag-version version patch",
-    "git": "git add * && git commit -m \"Auto commit \" && git push https://github.com/mgerasika/typescript-actions"
+    "git": "git add * && git commit -m \"Auto commit \" && git push https://github.com/mgerasika/typescript-actions",
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
