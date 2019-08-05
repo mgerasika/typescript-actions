@@ -14,13 +14,16 @@ export function reducerBase() {
 
 export abstract class ReducerBase<T extends IStoreBase> {
     private _store: T = {} as T;
-    private _executingActionName: string = '';
+    static _initStore: any;
 
     public abstract getStoreName(): string;
 
-    public init(actionName: string, store: T) {
-        this._executingActionName = actionName;
+    public init(store: T) {
         this._store = store;
+
+        if (!ReducerBase._initStore) {
+            ReducerBase._initStore = store;
+        }
     }
 
     public get store(): T {
@@ -38,12 +41,18 @@ export abstract class ReducerBase<T extends IStoreBase> {
         this.setState({loading: true} as T);
     }
 
-    public success(payload: any) {
+    public success(payload: any): void {
         this.setState({loading: false} as T);
     }
 
-    public failed(error: string) {
+    public failed(error: string): void {
         this.setState({loading: false, error: error} as T);
+    }
+
+    public resetStore(): void {
+        this._store = {
+            ...ReducerBase._initStore
+        };
     }
 }
 

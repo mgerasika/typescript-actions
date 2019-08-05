@@ -3,6 +3,8 @@ import {ReducerBase} from './reducer-base';
 import {IStoreBase} from './store';
 import {IAction} from './action-base';
 
+export declare type PromiseOrVoid<T> = Promise<T> | void;
+
 export const __decorate = function(decorators: any, target: any, key: any, desc: any) {
     if (
         typeof Reflect === 'object' &&
@@ -26,7 +28,7 @@ export const __decorate = function(decorators: any, target: any, key: any, desc:
     }
 };
 
-export const nameof = <T>(name: keyof T) => name;
+export const nameof = <T>(name: keyof T): string => name as string;
 
 export const assert = (exp: boolean, msg: string) => {
     if (!exp) {
@@ -35,7 +37,7 @@ export const assert = (exp: boolean, msg: string) => {
 };
 
 const UNIQUE_STORE_SEPARATOR = '-';
-export const createUniqueActionName = (storeName: string, actionName: string): string => {
+const createUniqueActionName = (storeName: string, actionName: string): string => {
     return `${storeName}${UNIQUE_STORE_SEPARATOR}${actionName}`;
 };
 
@@ -63,52 +65,84 @@ export declare function union<C extends {
 }>(ctors: C): C[keyof C]['action'];
 
 export const createReducer = (inst: ReducerBase<any>) => {
-    const proto = (inst as any)[`__proto__`];
-    const keys = Object.getOwnPropertyNames(proto);
-    const newKeys = keys.filter(key => {
-        // @ts-ignore
-        const hasDecorator = proto[key] && Reflect.getMetadata('design:decorator:reducer', proto[key]);
-        return hasDecorator;
-    });
-
-    const result: any = newKeys.reduce((accum: {}, methodName) => {
-        const reducersFn = createReducersFunctions(inst.getStoreName(), methodName, proto);
+    const methodNames = getReducerMethodNames(inst);
+    const result: any = methodNames.reduce((accum: {}, methodName) => {
+        const reducersFn = createReducersFunctions(inst.getStoreName(), methodName, inst);
         return {...accum, ...reducersFn};
     }, {});
+
     return (store: any, payload: IAction) => {
         return result[payload.name](store, payload);
     };
 };
 
-const createReducersFunctions = (storeName: string, methodName: string, proto: any): {} => {
-    const reducerFns: any = {};
-    reducerFns[createUniqueActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
-        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as any;
-        reducerInst.init(methodName, store);
-        return (reducerInst as any)[methodName](payload);
+const getReducerMethodNames = (inst: ReducerBase<any>): string[] => {
+    const proto = (inst as any)[`__proto__`];
+    const allPropertyNames = Object.getOwnPropertyNames(proto);
+    const methodNames = allPropertyNames.filter(key => {
+        // @ts-ignore
+        const hasDecorator = proto[key] && Reflect.getMetadata('design:decorator:reducer', proto[key]);
+        return hasDecorator;
+    });
+    return methodNames;
+};
+
+export const actionNames = {
+    getActionName: (storeName: string, methodName: string) => {
+        return createUniqueActionName(storeName, methodName);
+    },
+
+    getRequestActionName: (storeName: string, methodName: string) => {
+        return createUniqueActionName(storeName, `${methodName}:request`);
+    },
+
+    getSuccessActionName: (storeName: string, methodName: string) => {
+        return createUniqueActionName(storeName, `${methodName}:success`);
+    },
+
+    getFailedActionName: (storeName: string, methodName: string) => {
+        return createUniqueActionName(storeName, `${methodName}:failed`);
+    },
+
+    getResetStoreActionName: (storeName: string, methodName: string) => {
+        return createUniqueActionName(storeName, `${methodName}:reset-store`);
+    },
+};
+
+const createReducersFunctions = (storeName: string, methodName: string, inst: ReducerBase<any>): {} => {
+    const result: any = {};
+    const proto = (inst as any)[`__proto__`];
+    result[actionNames.getActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
+        return (inst as any)[methodName](store, payload);
     };
 
-    const requestMethodName = `${methodName}:request`;
-    reducerFns[createUniqueActionName(storeName, requestMethodName)] = (store: IStoreBase, payload: any) => {
+    result[actionNames.getRequestActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
         const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
-        reducerInst.init(requestMethodName, store);
-        return reducerInst.request();
+        reducerInst.init(store);
+        reducerInst.request();
+        return reducerInst.store;
     };
 
-    const successMethodName = `${methodName}:success`;
-    reducerFns[createUniqueActionName(storeName, successMethodName)] = (store: IStoreBase, payload: any) => {
+    result[actionNames.getSuccessActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
         const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
-        reducerInst.init(successMethodName, store);
+        reducerInst.init(store);
         reducerInst.success(payload);
-        return (reducerInst as any)[methodName](payload);
+        return (reducerInst as any)[methodName](store, payload);
     };
 
-    const failedMethodName = `${methodName}:failed`;
-    reducerFns[createUniqueActionName(storeName, failedMethodName)] = (store: IStoreBase, payload: any) => {
+    result[actionNames.getFailedActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
         const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
-        reducerInst.init(failedMethodName, store);
-        return reducerInst.failed(payload);
+        reducerInst.init(store);
+        reducerInst.failed(payload);
+        return reducerInst.store;
     };
 
-    return reducerFns;
+    result[actionNames.getResetStoreActionName(storeName, '')] = (store: IStoreBase, payload: any) => {
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
+        reducerInst.init(store);
+        reducerInst.resetStore();
+        return reducerInst.store;
+    };
+
+    return result;
 };

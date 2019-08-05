@@ -1,4 +1,4 @@
-import {createUniqueActionName} from './utils';
+import {actionNames} from './utils';
 
 export interface IAction {
     name: string;
@@ -8,43 +8,64 @@ export interface IAction {
 export declare type PromiseMix<First, Seccond> = Promise<First> | Seccond;
 
 export abstract class ActionBase {
-    private _executingActionName: string = '';
+    private _shortActionName: string = '';
     private _reduxDispatcher: IDispatch = () => {
     };
 
     public init(actionName: string, reduxDispatcher: IDispatch) {
-        this._executingActionName = actionName;
+        this._shortActionName = actionName;
         this._reduxDispatcher = reduxDispatcher;
     }
 
-    public dispatchFailed(error: any) {
-        this._reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':failed'),
-            payload: error,
-        });
-    }
 
     public abstract getStoreName(): string;
 
-    public dispatchRequest() {
-        this._reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':request'),
-            payload: ''
-        });
+    public request() {
+        return (dispatcher: IDispatch) => {
+            dispatcher({
+                name: actionNames.getRequestActionName(this.getStoreName(), this._shortActionName),
+                payload: null
+            });
+        };
     }
 
-    public dispatchSuccess(args: any) {
-        this._reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this._executingActionName + ':success'),
-            payload: args
-        });
+    public success(args: any) {
+        return (dispatcher: IDispatch) => {
+            dispatcher({
+                name: actionNames.getSuccessActionName(this.getStoreName(), this._shortActionName),
+                payload: args
+            });
+        };
     }
 
-    protected dispatch(payload: any) {
-        this._reduxDispatcher({
-            name: createUniqueActionName(this.getStoreName(), this._executingActionName),
-            payload
-        });
+    public failed(error: any) {
+        return (dispatcher: IDispatch) => {
+            dispatcher({
+                name: actionNames.getFailedActionName(this.getStoreName(), this._shortActionName),
+                payload: error
+            });
+        };
+    }
+
+    public resetStore() {
+        return (dispatcher: IDispatch) => {
+            dispatcher({
+                name: actionNames.getResetStoreActionName(this.getStoreName(), ''),
+                payload: null
+            });
+        };
+    }
+
+    public get actionName(): string {
+        return actionNames.getActionName(this.getStoreName(), this._shortActionName);
+    }
+
+    protected dispatch(data: IAction | IDispatch) {
+        if (typeof data === 'function') {
+            data(this._reduxDispatcher);
+        } else {
+            this._reduxDispatcher(data);
+        }
     }
 }
 
