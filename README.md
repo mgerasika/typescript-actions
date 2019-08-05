@@ -1,5 +1,5 @@
 # typescript-actions
-Typescript actions/reducers based on classes
+Typescript actions/reducers based on classes and decorators
 
 ## Installation
 
@@ -24,6 +24,9 @@ yarn add typescript-actions
 ```
 
 ## Add simple store
+The main idea - you should strongly synchronize interfaces betwen action and reducers, with typescript interfaces.
+This ideology uses a lot in .net projects and this is helpfull when you need support code.
+
 ```ts
 import {action, ActionBase, apiAction, nameof, PromiseOrVoid} from 'typescript-actions/dist';
 
@@ -42,14 +45,13 @@ export const initialCounterStore: ICounterStore = {
 import {action, ActionBase, apiAction, nameof, PromiseOrVoid} from 'typescript-actions/dist';
 
 export interface ICounterActions {
-  increment(): void;
-
-  decrement(): void;
+  increment();
+  decrement();
 }
 
 export class CounterActions extends ActionBase implements ICounterActions {
   @action()
-  public increment(): void {
+  public increment() {
     this.dispatch({
       name: this.actionName,
       payload: null
@@ -57,7 +59,7 @@ export class CounterActions extends ActionBase implements ICounterActions {
   }
 
   @action()
-  public decrement(): void {
+  public decrement() {
     this.dispatch({
       name: this.actionName,
       payload: null
@@ -80,17 +82,24 @@ export class CounterReducer extends ReducerBase<ICounterStore> implements ICount
   }
 
   @reducer()
-  public increment(): void {
+  public increment() {
     this.setState({
       result: this.store.result + 1
     });
   }
 
   @reducer()
-  public decrement(): void {
+  public decrement() {
     this.setState({
       result: this.store.result - 1
     });
   }
 }
+```
+
+## Add finaly create reducer
+```ts
+import {createReducer} from 'typescript-actions/dist';
+
+const reducerFn = createReducer(new CounterReducer());
 ```
