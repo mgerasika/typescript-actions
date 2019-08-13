@@ -84,14 +84,14 @@ export class CounterReducer extends ReducerBase<ICounterStore> implements ICount
   @reducer()
   public increment() {
     this.setState({
-      result: this.store.result + 1
+      result: this.state.result + 1
     });
   }
 
   @reducer()
   public decrement() {
     this.setState({
-      result: this.store.result - 1
+      result: this.state.result - 1
     });
   }
 }
