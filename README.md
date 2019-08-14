@@ -103,3 +103,29 @@ import {createReducer} from 'typescript-actions/dist';
 
 const reducerFn = createReducer(new CounterReducer());
 ```
+
+
+## Example action with async action
+```ts
+  @action()
+  public login(request: ILogin): Promise<string> {
+    this.dispatch(this.request());
+    return Promise.resolve('some data')
+      .then((data) => {
+        this.dispatch(this.success(data));
+        return Promise.resolve('');
+      })
+      .catch((error) => {
+        this.dispatch(this.failed(error));
+        return Promise.reject(error);
+      });
+  }
+
+```
+## With apiAction decorator you should minimize you code to:
+```ts
+
+  @apiAction()
+  public login(): Promise<string> {
+    return Promise.resolve('some data');
+  }
