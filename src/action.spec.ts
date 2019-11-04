@@ -20,7 +20,7 @@ test('adds 1 + 2 to equal 3', () => {
         }
     }).value();
     refToFn((arg: IAction) => {
-        expect(arg.name).toBe('x');
+        expect(arg.type).toBe('x');
     });
 });
 

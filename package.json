@@ -1,8 +1,9 @@
 {
   "name": "typescript-actions",
-  "version": "1.0.72",
+  "version": "1.1.1",
   "description": "First description",
   "main": "dist/index.js",
+  "typings": "index.d.ts",
   "dependencies": {
     "@types/reflect-metadata": "^0.1.0",
     "gulp": "^4.0.2",

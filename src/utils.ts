@@ -64,6 +64,11 @@ export declare function union<C extends {
     [key: string]: ActionCtor<string, {}, Ctor<{}>>;
 }>(ctors: C): C[keyof C]['action'];
 
+/**
+ * For any unknown actions, you must return the current state.
+ * If the current state is undefined, you must return the initial state.
+ * Do not reference these action types directly in your code.
+ */
 export const createReducer = (inst: ReducerBase<any>) => {
     const methodNames = getReducerMethodNames(inst);
     const result: any = methodNames.reduce((accum: {}, methodName) => {
@@ -71,9 +76,21 @@ export const createReducer = (inst: ReducerBase<any>) => {
         return {...accum, ...reducersFn};
     }, {});
 
-    return (store: any, payload: IAction) => {
-        return result[payload.name](store, payload);
+    return (state: any, payload: IAction) => {
+        if(!state) {
+            //todo initial
+            return {};
+        }
+        const fn = result[payload.type];
+        return fn ? fn(state, payload) : state;
     };
+};
+
+export const createReducers = (arr: Array<ReducerBase<IStoreBase>>) => {
+    return arr.reduce((accum: any, reducer: ReducerBase<IStoreBase>) => {
+        accum[reducer.getStoreName()] = createReducer(reducer);
+        return accum;
+    }, {});
 };
 
 const getReducerMethodNames = (inst: ReducerBase<any>): string[] => {
@@ -113,7 +130,9 @@ const createReducersFunctions = (storeName: string, methodName: string, inst: Re
     const result: any = {};
     const proto = (inst as any)[`__proto__`];
     result[actionNames.getActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {
-        return (inst as any)[methodName](store, payload);
+        const reducerInst: ReducerBase<IStoreBase> = Reflect.construct(proto.constructor, []) as ReducerBase<any>;
+        reducerInst.init(store);
+        return (reducerInst as any)[methodName](store, payload);
     };
 
     result[actionNames.getRequestActionName(storeName, methodName)] = (store: IStoreBase, payload: any) => {

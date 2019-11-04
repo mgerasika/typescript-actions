@@ -1,8 +1,8 @@
 import {actionNames} from './utils';
 
 export interface IAction {
-    name: string;
-    payload: any;
+    type: string;
+    payload?: any;
 }
 
 export declare type PromiseMix<First, Seccond> = Promise<First> | Seccond;

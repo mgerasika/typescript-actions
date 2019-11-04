@@ -9,7 +9,6 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "strict": true,
     "lib": [
       "es2015",
       "dom"
