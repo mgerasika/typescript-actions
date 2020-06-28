@@ -44,9 +44,15 @@ export const initialCounterStore: ICounterStore = {
 ```ts
 import {action, ActionBase, apiAction, nameof, PromiseOrVoid} from 'typescript-actions/dist';
 
+interface ISumExample {
+  x: number;
+  y: number;
+}
+
 export interface ICounterActions {
   increment();
   decrement();
+  sum(arg:IExampleArg);
 }
 
 export class CounterActions extends ActionBase implements ICounterActions {
@@ -63,6 +69,14 @@ export class CounterActions extends ActionBase implements ICounterActions {
     this.dispatch({
       name: this.actionName,
       payload: null
+    });
+  }
+  
+  @action()
+  public sum(arg:ISumExample) {
+    this.dispatch({
+      name: this.actionName,
+      payload: arg
     });
   }
 
@@ -92,6 +106,13 @@ export class CounterReducer extends ReducerBase<ICounterStore> implements ICount
   public decrement() {
     this.setState({
       result: this.state.result - 1
+    });
+  }
+  
+   @reducer()
+  public sum(arg:ISumExample) {
+    this.setState({
+      result: arg.x + arg.y
     });
   }
 }
