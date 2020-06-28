@@ -44,7 +44,7 @@ export const initialCounterStore: ICounterStore = {
 ```ts
 import {action, ActionBase, apiAction, nameof, PromiseOrVoid} from 'typescript-actions/dist';
 
-interface ISumExample {
+export interface ISumExample {
   x: number;
   y: number;
 }
